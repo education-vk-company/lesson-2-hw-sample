@@ -1,0 +1,11 @@
+form-input {
+	width: 100%;
+}
+
+.result {
+	color: red;
+}
+
+input[type=submit] {
+	visibility: collapse;
+}

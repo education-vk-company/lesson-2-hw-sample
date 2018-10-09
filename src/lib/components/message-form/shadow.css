@@ -2,10 +2,37 @@ form-input {
 	width: 100%;
 }
 
-.result {
-	color: red;
+div[slot=icon] > button {
+	outline: none;
+	display: inline-block;
+	text-align: center;
+	width: 20px;
+	height: 20px;
+	border: 1px solid gray;
+	font: inherit;
+	box-sizing: content-box;
+	padding: 0;
+	margin: 0 5px;
+	overflow: hidden;
 }
 
-input[type=submit] {
-	visibility: collapse;
+div[slot=icon] > button[type=submit] {
+	display: none;
+}
+
+.with-message div[slot=icon] > button[type=submit] {
+	display: block;
+}
+
+div[slot=icon] {
+	display: flex;
+	justify-content: space-around;
+}
+
+div[slot=icon] > button:nth-child(0) {
+	margin: 0 0 0 5px;
+}
+
+.result {
+	color: red;
 }

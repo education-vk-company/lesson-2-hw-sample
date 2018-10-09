@@ -12,6 +12,10 @@ module.exports = {
 		//publicPath: '/static/',
 		filename: '[name]/bundle.js'
 	},
+	devServer: {
+	     contentBase: './dist'
+	},
+	devtool: 'inline-source-map',
 	module: {
 		rules: [
 			{

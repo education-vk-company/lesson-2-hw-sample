@@ -1,17 +1,23 @@
-//import styles from './index.css';
 import shadowStyles from './shadow.css';
-
-const slotName = 'message-input';
+import FormInput from '../form/-input';
+import GeoInput from '../form/-geo-input';
 
 const template = `
 	<style>${shadowStyles.toString()}</style>
 	<form>
-		<div class="result"></div>
-		<form-input name="message_text" placeholder="Введите сообщеине" slot="message-input">
-			<span slot="icon"></span>
+		<form-input name="message_text" placeholder="Введите сообщение" slot="message-input">
+			<div slot="icon">
+				<button type="button">g</button>
+				<button type="submit">></button>
+			</div>
 		</form-input>
+		<geo-input name="message-pos"></geo-input>
 	</form>
 `;
+
+const stateClasses = {
+	withMessage: 'with-message'
+};
 
 class MessageForm extends HTMLElement {
 	constructor () {
@@ -35,7 +41,7 @@ class MessageForm extends HTMLElement {
 
 	_initElements () {
 		var form = this.shadowRoot.querySelector('form');
-		var message = this.shadowRoot.querySelector('.result');
+		var message = this.shadowRoot.querySelector('form-input');
 		this._elements = {
 			form: form,
 			message: message
@@ -44,16 +50,24 @@ class MessageForm extends HTMLElement {
 
 	_addHandlers () {
 		this._elements.form.addEventListener('submit', this._onSubmit.bind(this));
+		this._elements.message.addEventListener('input', this._onInput.bind(this));
 		this._elements.form.addEventListener('keypress', this._onKeyPress.bind(this));
-		//this._elements.inputSlot.addEventListener('slotchange', this._onSlotChange.bind(this));
 	}
 
 	_onSubmit (event) {
-		this._elements.message.innerText = Array.from(this._elements.form.elements).map(
-			el => el.value
-		).join(', ');
+		const message = {
+			text: this._elements.message.value,
+			time: new Date(),
+			my: true
+		};
+		this._elements.message.value = '';
+		this._elements.form.classList.remove(stateClasses.withMessage);
+		const messageEvent = new CustomEvent('new-message', {
+			bubbles: false,
+			detail: message
+		});
+		this.dispatchEvent(messageEvent);
 		event.preventDefault();
-		return false;
 	}
 
 	_onKeyPress (event) {
@@ -61,6 +75,20 @@ class MessageForm extends HTMLElement {
 			this._elements.form.dispatchEvent(new Event('submit'));
 		}
 	}
+
+	_onInput () {
+		if (this._elements.message.value.length > 0) {
+			this._elements.form.classList.add(stateClasses.withMessage);
+		} else {
+			this._elements.form.classList.remove(stateClasses.withMessage);
+		}
+	}
+}
+
+function serializeForm () {
+
 }
 
 customElements.define('message-form', MessageForm);
+
+export default MessageForm;

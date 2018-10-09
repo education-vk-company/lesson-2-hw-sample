@@ -1,10 +1,22 @@
 input {
+	display: inline;
 	border: 0;
 	outline: none;
-	width: calc(100% - 2px);
+	height: 24px;
+	font-size: 16px;
+	padding: 16px 0 16px 16px;
+	flex-grow: 1;
+}
+
+[name=icon] {
+	display: block;
+	padding: 4px 0;
+	text-align: center;
 }
 
 :host {
-	display: inline-block;
+	height: 56px;
+	display: flex;
+	align-items: center;
 	border: 1px solid rgba(25, 25, 25, 0.32);
 }

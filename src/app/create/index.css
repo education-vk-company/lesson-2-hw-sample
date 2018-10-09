@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	flex-basis: 50px;
+	height: 100vh;
+	font-family: 'Roboto', sans-serif;
+}
+
+messages-list {
+	flex-grow: 1;
+}

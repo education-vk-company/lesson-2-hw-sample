@@ -2,37 +2,38 @@ form-input {
 	width: 100%;
 }
 
-div[slot=icon] > button {
+div[slot=after] > button {
 	outline: none;
 	display: inline-block;
-	text-align: center;
-	width: 20px;
-	height: 20px;
-	border: 1px solid gray;
 	font: inherit;
 	box-sizing: content-box;
 	padding: 0;
 	margin: 0 5px;
+	border: 0;
+}
+
+div[slot=after] > * {
+	width: 50px;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	background: #f0f0f0;
 	overflow: hidden;
 }
 
-div[slot=icon] > button[type=submit] {
+div[slot=after] > button[type=submit] {
 	display: none;
 }
 
-.with-message div[slot=icon] > button[type=submit] {
+.with-message div[slot=after] > button[type=submit] {
 	display: block;
 }
 
-div[slot=icon] {
+div[slot=after] {
 	display: flex;
 	justify-content: space-around;
 }
 
-div[slot=icon] > button:nth-child(0) {
+div[slot=after] > button:nth-child(0) {
 	margin: 0 0 0 5px;
-}
-
-.result {
-	color: red;
 }

@@ -6,10 +6,6 @@ const template = `
 	<style>${shadowStyles.toString()}</style>
 `;
 
-const stateClasses = {
-	myMessages: 'my'
-};
-
 class MessagesList extends HTMLElement {
 	constructor () {
 		super();
@@ -30,9 +26,7 @@ class MessagesList extends HTMLElement {
 
 	static createMessage (message) {
 		const messageElem = document.createElement('list-message');
-		if (message.my) {
-			messageElem.classList.add(stateClasses.myMessages);
-		}
+		messageElem.my = message.my;
 		messageElem.setMessage(message);
 		return messageElem;
 	}

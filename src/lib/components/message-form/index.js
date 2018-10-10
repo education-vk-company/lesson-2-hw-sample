@@ -1,13 +1,16 @@
 import shadowStyles from './shadow.css';
 import FormInput from '../form/-input';
 import GeoInput from '../form/-geo-input';
+import FileInput from '../form/-file-input';
 
 const template = `
 	<style>${shadowStyles.toString()}</style>
 	<form>
 		<form-input name="message_text" placeholder="Введите сообщение" slot="message-input">
-			<div slot="icon">
-				<button type="button">g</button>
+			<div slot="before">
+			</div>
+			<div slot="after">
+				<file-input>g</file-input>
 				<button type="submit">></button>
 			</div>
 		</form-input>
@@ -42,9 +45,11 @@ class MessageForm extends HTMLElement {
 	_initElements () {
 		var form = this.shadowRoot.querySelector('form');
 		var message = this.shadowRoot.querySelector('form-input');
+		var fileInput = this.shadowRoot.querySelector('file-input');
 		this._elements = {
 			form: form,
-			message: message
+			message: message,
+			file: fileInput
 		};
 	}
 
@@ -52,6 +57,7 @@ class MessageForm extends HTMLElement {
 		this._elements.form.addEventListener('submit', this._onSubmit.bind(this));
 		this._elements.message.addEventListener('input', this._onInput.bind(this));
 		this._elements.form.addEventListener('keypress', this._onKeyPress.bind(this));
+		this._elements.file.addEventListener('change', this._onFileChange.bind(this))
 	}
 
 	_onSubmit (event) {
@@ -82,6 +88,20 @@ class MessageForm extends HTMLElement {
 		} else {
 			this._elements.form.classList.remove(stateClasses.withMessage);
 		}
+	}
+
+	_onFileChange (event) {
+		const message = {
+			text: null,
+			time: new Date(),
+			my: true,
+			files: event.target.files
+		};
+		const messageEvent = new CustomEvent('new-message', {
+			bubbles: false,
+			detail: message
+		});
+		this.dispatchEvent(messageEvent);
 	}
 }
 

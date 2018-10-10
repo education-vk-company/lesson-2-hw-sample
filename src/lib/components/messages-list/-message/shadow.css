@@ -5,16 +5,45 @@
 	margin: 4px 0;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.5);
 	border-radius: 3px;
+	background: #fff;
 }
 
-time {
+:host(.my) {
+	background: #f3e5f5;
+	align-self: flex-end;
+}
+
+time, span {
 	display: block;
 	font-size: 12px;
 	color: rgba(0,0,0, 0.6);
-	text-align: right;
+	padding-top: 4px;
+	float: right;
 }
 
-time::after {
-	content: '\2713';
+span {
+	float: left;
+	margin-right: 10px;
+}
+
+:host(.image) {
+	padding: 4px;
+}
+
+:host(.image) section > img {
+	max-width: 100%;
+}
+
+:host(.image) > time {
+	padding-right: 8px;
+}
+
+:host(.sended) > time::after {
+	 content: '\2713';
+	 margin-left: 3px;
+}
+
+:host(.recieved) > time::after {
+	content: '\2713\2713';
 	margin-left: 3px;
 }

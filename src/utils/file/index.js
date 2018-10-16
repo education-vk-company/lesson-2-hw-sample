@@ -3,7 +3,7 @@ const MB = Math.pow(KB, 2);
 
 const sizes = [
 	{
-		name: 'Кбай',
+		name: 'Кбайт',
 		size: KB
 	},
 	{

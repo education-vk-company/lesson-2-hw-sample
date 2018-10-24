@@ -10,7 +10,7 @@ const template = `
 			<div slot="before">
 			</div>
 			<div slot="after">
-				<file-input>g</file-input>
+				<file-input></file-input>
 				<button type="submit">></button>
 			</div>
 		</form-input>

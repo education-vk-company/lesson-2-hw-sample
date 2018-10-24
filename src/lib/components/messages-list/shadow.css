@@ -1,5 +1,9 @@
 :host {
-	width: 100%;
+	display: flex;
+	overflow-y: auto;
+}
+
+#container {
 	border: 1px solid rgba(25, 25, 25, 0.32);
 	border-bottom: 0;
 	padding: 8px;
@@ -10,4 +14,6 @@
 	flex-flow: column;
 	align-items: flex-start;
 	justify-content: flex-end;
+	flex-grow: 1;
+	min-height: min-content;
 }

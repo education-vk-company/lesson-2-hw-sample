@@ -1,7 +1,6 @@
 import shadowStyles from './shadow.css';
 
 import FormInput from '../-input';
-import {getReadableSize} from '../../../../utils/file'
 
 class FileInput extends FormInput {
 	constructor () {
@@ -32,16 +31,8 @@ class FileInput extends FormInput {
 		});
 	}
 
-	getFilesObject () {
-		const filesArray = Array.from(this._elements.input.files);
-		return {
-			list: filesArray,
-			size: getReadableSize(filesArray.reduce((result, file) => result + file.size, 0))
-		};
-	}
-
 	get files () {
-		return this.getFilesObject();
+		return this._elements.input.files;
 	}
 
 	set value (newVal) {

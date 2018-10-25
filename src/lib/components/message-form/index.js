@@ -61,18 +61,13 @@ class MessageForm extends HTMLElement {
 	}
 
 	_onSubmit (event) {
-		const message = {
+		const message = this.createMessage({
 			text: this._elements.message.value,
-			time: new Date(),
 			my: true
-		};
+		});
 		this._elements.message.value = '';
 		this._elements.form.classList.remove(stateClasses.withMessage);
-		const messageEvent = new CustomEvent('new-message', {
-			bubbles: false,
-			detail: message
-		});
-		this.dispatchEvent(messageEvent);
+		this._sendMessage(message);
 		event.preventDefault();
 	}
 
@@ -91,12 +86,35 @@ class MessageForm extends HTMLElement {
 	}
 
 	_onFileChange (event) {
-		const message = {
+		const message = this.createMessage({
 			text: null,
-			time: new Date(),
 			my: true,
-			files: event.target.files
-		};
+			attach: event.target.files[0]
+		});
+		this._sendMessage(message);
+	}
+
+	createMessage (params) {
+		let message =  Object.create({});
+		Object.keys(params).forEach((key) => message[key] = params[key]);
+		Object.defineProperty(message, 'my', {
+			configurable: true,
+			enumerable: false
+		});
+		message.my = true;
+		message.time = new Date();
+		message.time.toString = message.time.getTime();
+		return message;
+	}
+
+	_sendMessage (message) {
+		message.sending = fetch(this.action, {
+			method: 'POST',
+			body: Object.keys(message).reduce((formData, key) => {
+				if (message[key]) formData.append(key, message[key]);
+				return formData;
+			}, new FormData)
+		});
 		const messageEvent = new CustomEvent('new-message', {
 			bubbles: false,
 			detail: message

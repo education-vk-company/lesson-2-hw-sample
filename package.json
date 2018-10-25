@@ -1,5 +1,5 @@
 {
-  "name": "courses",
+  "name": "@zipp3r/courses",
   "version": "1.0.0",
   "description": "Frontend courses for MIPT",
   "main": "index.js",
@@ -7,6 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-server": "webpack-dev-server --mode=development --open"
   },
+  "files": [
+    "/dist"
+  ],
   "author": "zipper@medde.ru",
   "license": "ISC",
   "devDependencies": {

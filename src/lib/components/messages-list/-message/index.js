@@ -1,6 +1,7 @@
 import shadowStyles from './shadow.css';
 
 import {imagePattern} from '../../../../utils/file'
+import {getReadableSize} from '../../../../utils/file'
 
 const template = `
 	<style>${shadowStyles.toString()}</style>
@@ -23,10 +24,10 @@ class Message extends HTMLElement {
 	setMessage (message) {
 		const timeElem = this.shadowRoot.querySelector('time');
 		const contentElem = this.shadowRoot.querySelector('section');
-		if (message.files) {
+		if (message.attach) {
 			const size = document.createElement('span');
-			const file = message.files.list[0];
-			size.innerText = message.files.size;
+			const file = message.attach;
+			size.innerText = getReadableSize(file.size);
 			this.shadowRoot.insertBefore(size, timeElem);
 			if (file.type.match(imagePattern)) {
 				let image = document.createElement('img');

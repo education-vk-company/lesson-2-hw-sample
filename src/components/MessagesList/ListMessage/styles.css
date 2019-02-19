@@ -1,0 +1,49 @@
+.list-message {
+	padding: 12px;
+	font-size: 16px;
+	border: 1px solid rgba(0,0,0,0.25);
+	margin: 4px 0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+	border-radius: 3px;
+	background: #fff;
+}
+
+.list-message_my {
+	background: #f3e5f5;
+	align-self: flex-end;
+}
+
+.list-message_image {
+	padding: 4px;
+}
+
+.list-message_image > time {
+	padding-right: 8px;
+}
+
+.list-message_image > section > img {
+	max-width: 100%;
+}
+
+.list-message time, .list-message span {
+	display: block;
+	font-size: 12px;
+	color: rgba(0,0,0, 0.6);
+	padding-top: 4px;
+	float: right;
+}
+
+.list-message span {
+	float: left;
+	margin-right: 10px;
+}
+
+.list-message_sended > time::after {
+	 content: '\2713';
+	 margin-left: 3px;
+}
+
+.list-message_recieved > time::after {
+	content: '\2713\2713';
+	margin-left: 3px;
+}

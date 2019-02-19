@@ -1,0 +1,16 @@
+input {
+	display: inline;
+	border: 0;
+	outline: none;
+	height: 24px;
+	font-size: 16px;
+	padding: 16px 0 16px 16px;
+	flex-grow: 1;
+}
+
+.form-input {
+	height: 56px;
+	display: flex;
+	align-items: center;
+	border: 1px solid rgba(25, 25, 25, 0.32);
+}

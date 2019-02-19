@@ -1,0 +1,19 @@
+.message-list {
+	display: flex;
+	overflow-y: auto;
+}
+
+.message-list__container {
+	border: 1px solid rgba(25, 25, 25, 0.32);
+	border-bottom: 0;
+	padding: 8px;
+	box-sizing: border-box;
+	background: #f0f0f0;
+	display: flex;
+	flex-direction: column;
+	flex-flow: column;
+	align-items: flex-start;
+	justify-content: flex-end;
+	flex-grow: 1;
+	min-height: min-content;
+}

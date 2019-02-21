@@ -1,10 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
-import Chat from './Chat/Chat';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<Chat />, document.getElementById('root'));
+import {renderChat} from './Chat/deffer';
+renderChat('root');
+
+// import('./Chat/deffer').then(({renderChat}) => {
+// 	renderChat('root');
+// });
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

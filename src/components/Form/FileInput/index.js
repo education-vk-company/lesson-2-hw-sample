@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
 import FormInput from '../FormInput';
-import './styles.css';
+import styles from './styles.module.css';
 
 class FileInput extends Component {
 	render () {
 		return (
-			<div className="file-input">
+			<div className={styles["file-input"]}>
 				<label>
-					<FormInput type="file" onChange={this.props.onChange} />
+					<FormInput hidden={true} type="file" onChange={this.props.onChange} />
 				</label>
 			</div>
 		);
 	}
 }
-
-customElements.define('file-input', FileInput);
 
 export default FileInput;

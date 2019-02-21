@@ -12,7 +12,3 @@ body {
   height: 100vh;
   font-family: 'Roboto', sans-serif;
 }
-
-.message-list {
-  flex-grow: 1;
-}

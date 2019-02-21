@@ -1,4 +1,4 @@
-import './styles.css';
+import styles from './styles.module.css';
 import React, { Component } from 'react';
 
 function FileSize (props) {
@@ -50,9 +50,9 @@ class Message extends Component {
 	}
 
 	render () {
-		let classes = ['list-message'];
-		if (this.props.my) classes.push('list-message_my');
-		if (this.state.file && this.state.file.image) classes.push('list-message_image');
+		let classes = [styles['list-message']];
+		if (this.props.my) classes.push(styles['list-message_my']);
+		if (this.state.file && this.state.file.image) classes.push(styles['list-message_image']);
 		return (
 			<div className={classes.join(' ')}>
 				<section>

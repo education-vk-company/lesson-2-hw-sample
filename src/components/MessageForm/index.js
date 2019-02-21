@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import './styles.css';
+import styles from './styles.module.css';
 import FormInput from '../Form/FormInput';
 import FileInput from '../Form/FileInput';
-// import GeoInput from '../form/-geo-input';
-// import logo from "../../../src/logo.svg";
 
 function Button (props) {
 	const isVisible = props.visible;
 	if (isVisible) {
-		return <button type="submit">></button>
+		return <button type="submit" />
 	}
 	return null;
 }
@@ -29,8 +27,9 @@ class MessageForm extends Component {
 					placeholder="Введите сообщение"
 					onInput={this.onInput.bind(this)}
 					value={this.state.value}
+					autocomplete="off"
 				>
-						<div className="message-form-children">
+						<div className={styles["message-form-children"]}>
 							<FileInput onChange={this.onFileInput.bind(this)}/>
 							<Button visible={this.state.withMessage}/>
 						</div>
@@ -58,13 +57,16 @@ class MessageForm extends Component {
 
 	onSubmit (event) {
 		event.preventDefault();
-		let message = this.createMessage({
-			text: this.state.value
-		});
-		this.sendMessage(message);
-		this.setState({
-			value: ''
-		});
+		if (this.state.value) {
+			let message = this.createMessage({
+				text: this.state.value
+			});
+			this.sendMessage(message);
+			this.setState({
+				value: '',
+				withMessage: false
+			});
+		}
 	}
 
 	createMessage (params) {
@@ -72,8 +74,9 @@ class MessageForm extends Component {
 		Object.keys(params).forEach((key) => message[key] = params[key]);
 		Object.defineProperty(message, 'my', {
 			configurable: true,
-			enumerable: false,
-			value: true
+			enumerable: true,
+			value: true,
+			editable: false
 		});
 		message.time = new Date();
 		return message;

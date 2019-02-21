@@ -1,6 +1,7 @@
 .message-list {
 	display: flex;
 	overflow-y: auto;
+	flex-grow: 1;
 }
 
 .message-list__container {

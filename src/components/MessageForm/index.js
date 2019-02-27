@@ -46,11 +46,11 @@ class MessageForm extends Component {
 		})
 	}
 
-	onFileInput (event) {
+	onFileInput (file) {
 		const message = this.createMessage({
 			text: null,
 			my: true,
-			attach: event.target.files[0]
+			attach: file
 		});
 		this.sendMessage(message);
 	}

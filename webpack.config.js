@@ -1,47 +1,68 @@
+'use strict';
+
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const sourceRoot = path.resolve(__dirname, 'src');
+
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
+
+const SRC_PATH = path.resolve(__dirname, 'src');
+const BUILD_PATH = path.resolve(__dirname, 'build');
 
 module.exports = {
-	entry: {
-		create: sourceRoot + '/app/create/index.js'
-	},
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		//publicPath: '/static/',
-		filename: '[name]/bundle.js'
-	},
-	module: {
-		rules: [
-			{
-				test: /\.js$/,
-				include: sourceRoot,
-				use: {
-					loader: 'babel-loader'
-				}
-			},
-			{
-				test: /shadow\.css$/,
-				include: sourceRoot,
-				use: {
-					loader: 'css-loader'
-				}
-			},
-			{
-				test: /index\.css$/,
-				include: sourceRoot,
-				use: ExtractTextPlugin.extract('css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
-			}
-		]
-	},
-	plugins: [
-		new ExtractTextPlugin({
-			filename: '[name]/style.css'
-		}),
-		new HtmlWebpackPlugin({
-			filename: 'create/index.html',
-			template: './src/app/create/index.html'
-		})
-	]
+    context: SRC_PATH,
+    entry: {
+        index: './index.js',
+    },
+    output: {
+        path: BUILD_PATH,
+        filename: 'bundle.js'
+    },
+    module: {
+        strictExportPresence: true,
+        rules: [
+            {
+                test: /\.js$/,
+                include: SRC_PATH,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env']
+                        },
+                    },
+                ],
+            },
+            {
+                test: /shadow\.css$/,
+                include: SRC_PATH,
+                use: [
+                    {
+                        loader: 'css-loader'
+                    },
+                ],
+            },
+            {
+                test: /index\.css$/,
+                include: SRC_PATH,
+                use: [
+                    {
+                        loader: MiniCSSExtractPlugin.loader,
+                    },
+                    {
+                        loader: 'css-loader',
+                    },
+                ],
+            },
+        ],
+    },
+    plugins: [
+        new MiniCSSExtractPlugin({
+            filename: 'style.css',
+        }),
+        new HTMLWebpackPlugin({
+            filename: 'index.html',
+            template: './index.html'
+        })
+    ]
 };
